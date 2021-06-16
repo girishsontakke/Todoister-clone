@@ -81,6 +81,8 @@ public class BottomSheetFragment extends BottomSheetDialogFragment implements Vi
         binding.enterTodoEt.setText("");
         dueDate = Calendar.getInstance().getTime();
         priority = Priority.HIGH;
+        task = null;
+        isEdit = false;
     }
 
     @SuppressLint("NonConstantResourceId")
