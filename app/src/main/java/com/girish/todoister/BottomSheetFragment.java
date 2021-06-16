@@ -76,14 +76,9 @@ public class BottomSheetFragment extends BottomSheetDialogFragment implements Vi
     @Override
     public void onPause() {
         super.onPause();
-        sharedViewModel.selectItem(null);
-        binding.radioButtonHigh.setChecked(true);
-        binding.enterTodoEt.setText("");
-        dueDate = Calendar.getInstance().getTime();
-        priority = Priority.HIGH;
-        task = null;
-        isEdit = false;
+        cleanup();
     }
+
 
     @SuppressLint("NonConstantResourceId")
     private void onPriorityChange(RadioGroup group, int checkedId) {
@@ -133,7 +128,7 @@ public class BottomSheetFragment extends BottomSheetDialogFragment implements Vi
 
     private void onSave(View view) {
         String text = binding.enterTodoEt.getText().toString().trim();
-        if (!TextUtils.isEmpty(text) && dueDate!=null && priority != null) {
+        if (!TextUtils.isEmpty(text) && dueDate != null && priority != null) {
             if (isEdit) {
                 task.setTask(text);
                 task.setDateDue(dueDate);
@@ -171,5 +166,15 @@ public class BottomSheetFragment extends BottomSheetDialogFragment implements Vi
                 break;
         }
         dueDate = calendar.getTime();
+    }
+
+    private void cleanup() {
+        sharedViewModel.selectItem(null);
+        binding.radioButtonHigh.setChecked(true);
+        binding.enterTodoEt.setText("");
+        dueDate = Calendar.getInstance().getTime();
+        priority = Priority.HIGH;
+        task = null;
+        isEdit = false;
     }
 }
